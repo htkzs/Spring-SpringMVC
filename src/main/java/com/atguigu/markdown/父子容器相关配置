@@ -1,0 +1,16 @@
+springmvc.xml相关配置
+如果配置：
+ <!--会走视图解析器InternalResourceViewResolver 所以使用是需要和视图解析器同时使用-->
+ <mvc:view-controller path="/ToLoginPage" view-name="login"/>
+
+ 测试http://localhost:8080/Spring_SpringMVC_war_exploded/ToLoginPage可以访问
+
+而动态资源
+ http://localhost:8080/Spring_SpringMVC_war_exploded/hello不可以访问
+ 此时需要添加
+ <mvc:annotation-driven/>
+
+ 增加jquery等资源文件注意一定不要放在WEB-INF下而要放在webapp下，否则无法访问
+ 而且要添加如下配置：jquery属于静态资源交给tomcat处理
+ <!--用于处理静态资源 直接将静态资源交给tomcat处理-->
+ <mvc:default-servlet-handler/>

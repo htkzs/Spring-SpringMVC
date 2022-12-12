@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--使用SpringMVC容器作为子容器 配置web相关组件 网站转发逻辑以及网站功能有关的(视图解析器，文件上传解析器，支持ajax等配置-->
+       <context:component-scan base-package="com.atguigu.controller"/>
+
+    <!--配置一个视图解析器-->
+       <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+           <property name="prefix" value="/WEB-INF/pages/"/>
+           <property name="suffix" value=".jsp"/>
+       </bean>
+       <!--会走视图解析器InternalResourceViewResolver 所以使用是需要和视图解析器同时使用-->
+       <mvc:view-controller path="/ToLoginPage" view-name="login"/>
+       <!--用于处理静态资源 直接将静态资源交给tomcat处理-->
+       <mvc:default-servlet-handler/>
+       <!--防止动态资源不能访问-->
+       <mvc:annotation-driven/>
+</beans>
